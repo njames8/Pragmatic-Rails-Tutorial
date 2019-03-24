@@ -52,4 +52,12 @@ class ProductsControllerTest < ActionController::TestCase
 
     assert_redirected_to products_path
   end
+
+  test "get products" do
+    get :index
+    assert_response :success
+    assert_select '.list_line_odd', 2
+    assert_select '.list_line_even', 2
+    assert_select '.list_description', 4
+  end
 end
