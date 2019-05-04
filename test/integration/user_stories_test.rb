@@ -65,11 +65,11 @@ class UserStoriesTest < ActionDispatch::IntegrationTest
   test 'logout and try to fetch orders' do
     delete '/logout'
     assert_response :redirect
-    assert_redirected_to '/'
+    assert_redirected_to store_path(locale: I18n.locale.to_s)
 
     get '/orders'
     assert_response :redirect
-    assert_redirected_to '/login'
+    assert_redirected_to login_path(locale: I18n.locale.to_s)
   end
 
   test 'logout and fetch products' do
@@ -78,7 +78,7 @@ class UserStoriesTest < ActionDispatch::IntegrationTest
 
     delete '/logout'
     assert_response :redirect
-    assert_redirected_to '/'
+    assert_redirected_to store_path(locale: I18n.locale.to_s)
 
     ruby_book = products(:ruby)
 
