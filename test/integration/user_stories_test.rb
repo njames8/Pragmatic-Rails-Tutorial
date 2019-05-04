@@ -61,4 +61,33 @@ class UserStoriesTest < ActionDispatch::IntegrationTest
     assert_equal 'Nick James <depot@example.com>', mail[:from].value
     assert_equal 'Pragmatic Store Order Confirmation', mail.subject
   end
+
+  test 'logout and try to fetch orders' do
+    delete '/logout'
+    assert_response :redirect
+    assert_redirected_to '/'
+
+    get '/orders'
+    assert_response :redirect
+    assert_redirected_to '/login'
+  end
+
+  test 'logout and fetch products' do
+    LineItem.delete_all
+    Order.delete_all
+
+    delete '/logout'
+    assert_response :redirect
+    assert_redirected_to '/'
+
+    ruby_book = products(:ruby)
+
+    # add product to cart
+    xml_http_request :post, '/line_items', product_id: ruby_book.id
+    assert_response :success
+
+    get '/orders/new'
+    assert_response :success
+    assert_template 'new'
+  end
 end

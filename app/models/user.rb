@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   validates :name, presence: true, uniqueness: true
+  validates :password, presence: true, confirmation: true, on: %i[create update]
   has_secure_password
   after_destroy :ensure_an_admin_remains
 
