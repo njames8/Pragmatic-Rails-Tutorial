@@ -16,4 +16,8 @@ class Cart < ActiveRecord::Base
   def total_price
     line_items.to_a.sum(&:total_price)
   end
+
+  def current_item
+    return line_items.order("updated_at DESC").last
+  end
 end
