@@ -7,9 +7,10 @@
         },
         :only => [:id, :price, :quantity]
     ),
-    totalPrice: number_to_currency(cart.total_price),
+    totalPrice: cart.total_price,
     currentItem: cart.current_item,
-    title: t('.title')
+    title: t('.title'),
+
 }, {prerender: true}) %>
 
 <% if !current_page?(:controller => "orders", :action => "new") %>

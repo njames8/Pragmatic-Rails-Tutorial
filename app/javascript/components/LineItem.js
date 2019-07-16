@@ -1,10 +1,11 @@
 import React from "react"
 import PropTypes from "prop-types"
+import I18n from "i18n-js"
 class LineItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      price: Number.parseFloat(props.lineItem.price).toFixed(2).toLocaleString(),
+      price: I18n.l('currency', Number.parseFloat(props.lineItem.price)),
       title: props.lineItem.product.title,
       quantity: props.lineItem.quantity
     }

@@ -1,6 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import LineItem from "./LineItem"
+import I18n from "i18n-js"
 class CartSidebar extends React.Component {
   constructor(props) {
     super(props);
@@ -8,7 +9,7 @@ class CartSidebar extends React.Component {
       lineItems: JSON.parse(props.lineItems),
       currentItem: props.currentItem != null ? props.currentItem.id : -1,
       title: props.title,
-      totalPrice: props.totalPrice
+      totalPrice: I18n.l('currency', Number.parseFloat(props.totalPrice))
     }
   }
 
